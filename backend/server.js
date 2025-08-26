@@ -8,7 +8,11 @@ import path from 'path';
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-// limite des requêtes à 50MB
+app.get("/test", (req, res) => {
+  res.json({ message: "Backend OK !" });
+});
+
+// limite des requêtes à 150MB
 app.use(bodyParser.json({ limit: '150mb' }));
 app.use(bodyParser.urlencoded({ limit: '150mb', extended: true }));
 
