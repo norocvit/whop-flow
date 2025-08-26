@@ -6,7 +6,7 @@ import fs from 'fs';
 import path from 'path';
 
 const app = express();
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 // limite des requêtes à 50MB
 app.use(bodyParser.json({ limit: '150mb' }));
@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ limit: '150mb', extended: true }));
 
 app.use(cors());
 app.use(express.json());
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static('uploads')); 
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -94,5 +94,5 @@ app.delete('/scheduled/:index', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Serveur lancé sur http://localhost:${PORT}`);
+  console.log(`✅ Serveur lancé sur le port ${PORT}`);
 });
