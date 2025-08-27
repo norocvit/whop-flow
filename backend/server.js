@@ -4,6 +4,7 @@ import multer from 'multer';
 import cors from 'cors';
 import fs from 'fs';
 import path from 'path';
+import oauthRoutes from "./oauth.js";
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -11,6 +12,8 @@ const PORT = process.env.PORT || 4000;
 app.get("/test", (req, res) => {
   res.json({ message: "Backend OK !" });
 });
+
+app.use("/", oauthRoutes);
 
 // limite des requêtes à 150MB
 app.use(bodyParser.json({ limit: '150mb' }));
