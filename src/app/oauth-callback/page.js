@@ -7,17 +7,22 @@ export default function OAuthCallback() {
   const router = useRouter();
 
   useEffect(() => {
+    if (!searchParams) return;
+
     const platform = searchParams.get("platform");
     const token = searchParams.get("token");
 
     if (platform && token) {
-      // Ici on stocke le token localement pour test
+      // Stockage local du token pour test
       localStorage.setItem(`${platform}_token`, token);
       alert(`${platform} connected! Token saved locally.`);
+
       // Redirection vers la page principale
       router.push("/");
+    } else {
+      alert("OAuth failed or missing parameters.");
     }
-  }, []);
+  }, [searchParams, router]);
 
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
